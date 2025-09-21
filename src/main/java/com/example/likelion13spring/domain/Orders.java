@@ -28,10 +28,19 @@ public class Orders extends BaseTimeEntity {
     @JoinColumn(name ="buyer_id")
     private Member buyer;
 
-    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<ProductOrders> productOrders;
 
-    @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Coupon coupon;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private ShippingAddress shippingAddress;
+
+    public void update(DeliverStatus deliverStatus){
+        this.deliverStatus = deliverStatus;
+    }
+
 }
 
