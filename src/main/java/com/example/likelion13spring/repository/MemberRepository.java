@@ -55,4 +55,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Page<Member> findByAgeGreaterThanEqual(int age, Pageable pageable);
 
     Page<Member> findByNameStartingWith(String name, Pageable pageable);
+
+    // 이름 중복 검사 쿼리
+    boolean existsByName(String name);
+
 }
