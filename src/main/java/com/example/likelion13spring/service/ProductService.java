@@ -3,6 +3,7 @@ package com.example.likelion13spring.service;
 import com.example.likelion13spring.domain.Member;
 import com.example.likelion13spring.domain.Product;
 import com.example.likelion13spring.dto.request.ProductRequestDto;
+import com.example.likelion13spring.dto.response.ProductResponseByNameDto;
 import com.example.likelion13spring.dto.response.ProductResponseDto;
 import com.example.likelion13spring.repository.MemberRepository;
 import com.example.likelion13spring.repository.ProductRepository;
@@ -91,5 +92,12 @@ public class ProductService {
 
         // 삭제
         productRepository.delete(product);
+    }
+
+    @Transactional
+    public List<ProductResponseByNameDto> findProductNamesByUsername(String username) {
+        return productRepository.findBySeller_Name(username).stream()
+                .map(p -> new ProductResponseByNameDto(p.getName()))
+                .toList();
     }
 }
